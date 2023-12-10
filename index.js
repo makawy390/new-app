@@ -18,10 +18,10 @@ require('./db/connent.db');
 app.use(cors());
 // 8) import Router Projects Api
 const projectRouter = require('./routes/project.route');
-app.use('api/projects' , projectRouter);
+app.use('/api/projects' , projectRouter);
 // 9) import Router User Api
 const userRouter = require('./routes/user.route');
-app.use('api/users' , userRouter );
+app.use('/api/users' , userRouter );
 // 10) import any Api Error
 app.all('*', (req, res, next) => {
    return res.status(404).json({status : httpStatus.ERROR , message : httpStatus.MESSAGE });
