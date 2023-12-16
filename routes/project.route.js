@@ -36,7 +36,7 @@ router.route('/add_project')
 router.route('/edit/:id')
 .patch(verifyToken,allowedTo("admin" , "manager") , projectControllerFunc.updataProject);
 router.route('/delete/:id')
-.delete( verifyToken, allowedTo("admin" , "manager") , projectControllerFunc.deleteProject);
+.delete(allowedTo("admin" , "manager") , projectControllerFunc.deleteProject);
 
 router.route('/deleteAll')
 .delete(projectControllerFunc.deleteAll);
