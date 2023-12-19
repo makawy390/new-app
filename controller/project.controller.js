@@ -44,7 +44,6 @@ const addNewProject = middleWareAsync(
     image : result.secure_url
   });
     await newProject.save();
-   
   if (!newProject) {
   const error = appError.create("feild is required", 400 , httpStatus.FAIL);
     return next(error);
@@ -58,9 +57,7 @@ const updataProject = middleWareAsync(
   async(req,res,next)=>{
     const {id} = req.params;
     const {title , repo_link , demo_link , technolgies} = req.body;
-  const result = await cloudinary.uploader.upload(req.file.path , {
-    folder : 'portfolio'
-  });
+    const result = await cloudinary.uploader.upload(req.file.path);
     const updata = await Project.findByIdAndUpdate({_id :id} , {$set:{
     title,
     repo_link,
