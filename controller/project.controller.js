@@ -57,7 +57,17 @@ const addNewProject = middleWareAsync(
 const updataProject = middleWareAsync(
   async(req,res,next)=>{
     const {id} = req.params;
-    const updata = await Project.findByIdAndUpdate({_id :id} , {$set:{...req.body}});
+    const {title , repo_link , demo_link , technolgies} = req.body;
+  const result = await cloudinary.uploader.upload(req.file.path , {
+    folder : 'portfolio'
+  });
+    const updata = await Project.findByIdAndUpdate({_id :id} , {$set:{
+    title,
+    repo_link,
+    demo_link,
+    technolgies,
+    image : result.secure_url
+  }});
     if (!updata) {
     const error = appError.create("project not found", 400 , httpStatus.FAIL);
     return next(error);
