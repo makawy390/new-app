@@ -57,7 +57,7 @@ const updataProject = middleWareAsync(
   async(req,res,next)=>{
     const {id} = req.params;
     const {title , repo_link , demo_link , technolgies} = req.body;
-    const updata = await Project.updateOne({_id :id} , {$set:{
+    const updata = await Project.findByIdAndUpdate({_id :req.params.id} , {$set:{
      title , repo_link , demo_link , technolgies
     }});
     if (!updata) {
@@ -71,7 +71,7 @@ const updataProject = middleWareAsync(
 const update_image = middleWareAsync(
     async (req ,res , next) =>{
         const result = await cloudinary.uploader.upload(req.file.path);
-            const update = await Project.updateOne({_id : req.params.id} ,
+            const update = await Project.findByIdAndUpdate({_id : req.params.id} ,
                  {$set: { image : result.secure_url}});
             if (!update) {
             const error = appError.create("project not found", 400 , httpStatus.FAIL);
