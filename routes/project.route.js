@@ -35,6 +35,10 @@ router.route('/add_project')
 .post(verifyToken , allowedTo("admin" , "manager") , upload.single('image') ,  projectControllerFunc.addNewProject);
 router.route('/edit/:id')
 .patch(verifyToken,allowedTo("admin" , "manager") , projectControllerFunc.updataProject);
+
+router.route('/edit-image/:id')
+.patch(verifyToken,allowedTo("admin" , "manager") , projectControllerFunc.update_image);
+
 router.route('/delete/:id')
 .delete(projectControllerFunc.deleteProject);
 
