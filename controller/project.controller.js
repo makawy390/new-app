@@ -68,7 +68,7 @@ const updataProject = middleWareAsync(
   }
 )
 /* ============================================================================== */
-const update_image = asyncWrapper(
+const update_image = middleWareAsync(
     async (req ,res , next) =>{
         const result = await cloudinary.uploader.upload(req.file.path);
             const update = await Project.updateOne({_id : req.params.id} ,
